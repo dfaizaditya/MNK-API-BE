@@ -9,13 +9,13 @@
 			"name": "auth",
 			"item": [
 				{
-					"name": "Register",
+					"name": "Register User",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"username\": \"{{newUsername}}_{{$timestamp}}\",\n    \"password\": \"{{newPassword}}\",\n    \"name\": \"{{newName}}\",\n    \"email\": \"{{$timestamp}}_{{newEmail}}\"\n}",
+							"raw": "{\n    \"username\": \"{{newUsername}}_{{$timestamp}}\",\n    \"password\": \"{{newPassword}}\",\n    \"name\": \"{{newName}}\",\n    \"email\": \"{{$timestamp}}_{{newEmail}}\",\n    \"roles\": \"{{userRoles}}\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -38,7 +38,36 @@
 					"response": []
 				},
 				{
-					"name": "Login",
+					"name": "Register Doctor",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"{{newUsername}}_{{$timestamp}}\",\n    \"password\": \"{{newPassword}}\",\n    \"name\": \"{{newName}}\",\n    \"email\": \"{{$timestamp}}_{{newEmail}}\",\n    \"roles\": \"{{doctorRoles}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/auth/register",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login User",
 					"event": [
 						{
 							"listen": "prerequest",
@@ -68,6 +97,17 @@
 									"pm.sendRequest(postRequest, (error, response) => {",
 									"    console.log(error ? error : response.json());",
 									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.environment.set(\"accessToken\", jsonData.data.token);",
+									"pm.environment.set(\"refreshToken\", jsonData.data.refreshToken);"
 								],
 								"type": "text/javascript"
 							}
@@ -107,30 +147,7 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"const host = pm.environment.get('host');",
-									"const port = pm.environment.get('port');",
-									"const protocol = pm.environment.get('protocol');",
-									"",
-									"const postRequest = {",
-									"    url: `${protocol}://${host}:${port}/auth/register`,",
-									"    method: 'POST',",
-									"    header: {",
-									"        'Content-Type': 'application/json',",
-									"    },",
-									"    body: {",
-									"        mode: 'raw',",
-									"        raw: JSON.stringify({",
-									"            username: pm.environment.get('newUsername'),",
-									"            password: pm.environment.get('newPassword'),",
-									"            name: pm.environment.get('newName'),",
-									"            email: pm.environment.get('newEmail'),",
-									"        }),",
-									"    },",
-									"};",
-									"",
-									"pm.sendRequest(postRequest, (error, response) => {",
-									"    console.log(error ? error : response.json());",
-									"});"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -141,7 +158,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"refreshToken\": \"{{newUsername}}\",\n}",
+							"raw": "{\n    \"refreshToken\": \"{{refreshToken}}\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"

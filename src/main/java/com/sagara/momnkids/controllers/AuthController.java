@@ -56,7 +56,8 @@ public class AuthController {
             String refreshToken = jwtUtils.generateRefresJwtToken(authentication);
             UserDetailsImpl principal = (UserDetailsImpl) authentication.getPrincipal();
 
-            JwtResponse result = new JwtResponse(token, refreshToken, principal.getUsername(), principal.getEmail());
+            JwtResponse result = new JwtResponse(principal.getUsername(), principal.getEmail(), principal.getRoles(),
+                    token, refreshToken);
             return ResponseHandler.generateResponse("Login Success", HttpStatus.OK, result);
         } catch (Exception e) {
             return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.MULTI_STATUS, null);
@@ -72,7 +73,7 @@ public class AuthController {
             myUser.setEmail(request.getEmail());
             myUser.setPassword(passwordEncoder.encode(request.getPassword()));
             myUser.setName(request.getName());
-            myUser.setRoles("user");
+            myUser.setRoles(request.getRoles());
             User created = userService.create(myUser);
             return ResponseHandler.generateResponse("Register Success", HttpStatus.OK, created);
         } catch (Exception e) {
@@ -94,6 +95,7 @@ public class AuthController {
                 userDetailsImpl.getAuthorities());
         String newToken = jwtUtils.generateJwtToken(authentication);
         String refreshToken = jwtUtils.generateRefresJwtToken(authentication);
-        return ResponseEntity.ok(new JwtResponse(newToken, refreshToken, username, userDetailsImpl.getEmail()));
+        return ResponseEntity.ok(new JwtResponse(username, userDetailsImpl.getEmail(), userDetailsImpl.getRoles(),
+                newToken, refreshToken));
     }
 }

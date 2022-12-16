@@ -11,5 +11,6 @@ public class RegisterRequest implements Serializable {
     private String password;
     private String email;
     private String name;
+    private String roles;
 
 }
