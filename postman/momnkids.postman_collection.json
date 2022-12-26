@@ -489,6 +489,57 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Add Pregnancy",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();",
+											"pm.environment.set(\"pregnancyId\", jsonData.data.id);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{accessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"hpht\": \"{{hpht}}\",\n    \"hpl\": \"{{hpl}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{host}}:{{port}}/api/pregnancies",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"pregnancies"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
@@ -517,7 +568,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{protocol}}://{{host}}:{{port}}/api/childs",
+							"raw": "{{protocol}}://{{host}}:{{port}}/api/pregnancies/{{pregnancyId}}/child",
 							"protocol": "{{protocol}}",
 							"host": [
 								"{{host}}"
@@ -525,7 +576,9 @@
 							"port": "{{port}}",
 							"path": [
 								"api",
-								"childs"
+								"pregnancies",
+								"{{pregnancyId}}",
+								"child"
 							]
 						}
 					},
