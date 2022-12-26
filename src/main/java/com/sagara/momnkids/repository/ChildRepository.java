@@ -8,6 +8,6 @@ import com.sagara.momnkids.entity.Child;
 
 public interface ChildRepository extends JpaRepository<Child, String>  {
     
-    List<Child> findByUserId(String userId);
+    List<Child> findByPregnancyId(String pregnancyId);
 
 }

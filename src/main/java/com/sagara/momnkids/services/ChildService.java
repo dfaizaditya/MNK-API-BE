@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sagara.momnkids.entity.Child;
+import com.sagara.momnkids.entity.Pregnancy;
 import com.sagara.momnkids.entity.User;
 import com.sagara.momnkids.exception.ResourceNotFoundException;
 import com.sagara.momnkids.models.ChildRequest;
@@ -24,14 +25,14 @@ public class ChildService {
                 .orElseThrow(() -> new ResourceNotFoundException("Kehamilan dengan id " + id + " tidak ditemukan"));
     }
 
-    public List<Child> findAll(String userId) {
-        return childRepository.findByUserId(userId);
+    public List<Child> findAll(String pregnancyId) {
+        return childRepository.findByPregnancyId(pregnancyId);
     }
 
-    public ChildResponse create(String username, ChildRequest request) {
+    public ChildResponse create(Pregnancy pregnancy, ChildRequest request) {
         Child child = new Child();
         child.setId(UUID.randomUUID().toString());
-        child.setUser(new User(username));
+        child.setPregnancy(pregnancy);
         child.setAge(request.getAge());
         child.setLength(request.getLength());
         child.setWeight(request.getWeight());
