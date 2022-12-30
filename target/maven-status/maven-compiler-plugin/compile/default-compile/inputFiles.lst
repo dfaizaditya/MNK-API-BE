@@ -2,6 +2,7 @@
 /home/dfaiz/Documents/MNK-API-BE/src/main/java/com/sagara/momnkids/security/services/UserDetailsImpl.java
 /home/dfaiz/Documents/MNK-API-BE/src/main/java/com/sagara/momnkids/models/RegisterRequest.java
 /home/dfaiz/Documents/MNK-API-BE/src/main/java/com/sagara/momnkids/entity/User.java
+/home/dfaiz/Documents/MNK-API-BE/src/main/java/com/sagara/momnkids/controllers/ChildUpdateController.java
 /home/dfaiz/Documents/MNK-API-BE/src/main/java/com/sagara/momnkids/utils/PregnancyCalc.java
 /home/dfaiz/Documents/MNK-API-BE/src/main/java/com/sagara/momnkids/MomnkidsApplication.java
 /home/dfaiz/Documents/MNK-API-BE/src/main/java/com/sagara/momnkids/utils/DateHelper.java
@@ -11,9 +12,12 @@
 /home/dfaiz/Documents/MNK-API-BE/src/main/java/com/sagara/momnkids/response/ResponseHandler.java
 /home/dfaiz/Documents/MNK-API-BE/src/main/java/com/sagara/momnkids/models/RefreshTokenRequest.java
 /home/dfaiz/Documents/MNK-API-BE/src/main/java/com/sagara/momnkids/models/JwtResponse.java
+/home/dfaiz/Documents/MNK-API-BE/src/main/java/com/sagara/momnkids/repository/ChildUpdateRepository.java
+/home/dfaiz/Documents/MNK-API-BE/src/main/java/com/sagara/momnkids/models/ChildUpdateRequest.java
 /home/dfaiz/Documents/MNK-API-BE/src/main/java/com/sagara/momnkids/security/jwt/AuthEntryPointJwt.java
 /home/dfaiz/Documents/MNK-API-BE/src/main/java/com/sagara/momnkids/security/jwt/AuthTokenFilter.java
 /home/dfaiz/Documents/MNK-API-BE/src/main/java/com/sagara/momnkids/controllers/ChildController.java
+/home/dfaiz/Documents/MNK-API-BE/src/main/java/com/sagara/momnkids/services/ChildUpdateService.java
 /home/dfaiz/Documents/MNK-API-BE/src/main/java/com/sagara/momnkids/repository/UserRepository.java
 /home/dfaiz/Documents/MNK-API-BE/src/main/java/com/sagara/momnkids/models/PregnancyResponse.java
 /home/dfaiz/Documents/MNK-API-BE/src/main/java/com/sagara/momnkids/controllers/PregnancyController.java
@@ -26,6 +30,7 @@
 /home/dfaiz/Documents/MNK-API-BE/src/main/java/com/sagara/momnkids/repository/ChildRepository.java
 /home/dfaiz/Documents/MNK-API-BE/src/main/java/com/sagara/momnkids/entity/Child.java
 /home/dfaiz/Documents/MNK-API-BE/src/main/java/com/sagara/momnkids/repository/PregnancyRepository.java
+/home/dfaiz/Documents/MNK-API-BE/src/main/java/com/sagara/momnkids/models/ChildUpdateResponse.java
 /home/dfaiz/Documents/MNK-API-BE/src/main/java/com/sagara/momnkids/controllers/AuthController.java
 /home/dfaiz/Documents/MNK-API-BE/src/main/java/com/sagara/momnkids/models/LoginRequest.java
 /home/dfaiz/Documents/MNK-API-BE/src/main/java/com/sagara/momnkids/services/UserService.java

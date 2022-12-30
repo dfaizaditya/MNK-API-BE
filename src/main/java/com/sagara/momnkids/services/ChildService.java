@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.sagara.momnkids.entity.Child;
 import com.sagara.momnkids.entity.Pregnancy;
-import com.sagara.momnkids.entity.User;
 import com.sagara.momnkids.exception.ResourceNotFoundException;
 import com.sagara.momnkids.models.ChildRequest;
 import com.sagara.momnkids.models.ChildResponse;
@@ -19,6 +18,7 @@ public class ChildService {
 
     @Autowired
     private ChildRepository childRepository;
+
 
     public Child findById(String id) {
         return childRepository.findById(id)
@@ -32,20 +32,31 @@ public class ChildService {
     public ChildResponse create(Pregnancy pregnancy, ChildRequest request) {
         Child child = new Child();
         child.setId(UUID.randomUUID().toString());
-        child.setPregnancy(pregnancy);
+
         child.setAge(request.getAge());
         child.setLength(request.getLength());
         child.setWeight(request.getWeight());
         child.setIllustration(request.getIllustration());
         child.setDescription(request.getDescription());
+        child.setPregnancy(pregnancy);
+
+        pregnancy.setChild(child);
 
         Child saved = childRepository.save(child);
         ChildResponse childResponse = new ChildResponse(saved);
         return childResponse;
     }
 
-    public Child edit(Child child) {
-        return childRepository.save(child);
+    public ChildResponse edit(Child child, ChildRequest request) {
+        child.setAge(request.getAge());
+        child.setLength(request.getLength());
+        child.setWeight(request.getWeight());
+        child.setIllustration(request.getIllustration());
+        child.setDescription(request.getDescription());
+        
+        Child saved = childRepository.save(child);
+        ChildResponse childResponse = new ChildResponse(saved);
+        return childResponse;
     }
 
     public void deleteById(String id) {

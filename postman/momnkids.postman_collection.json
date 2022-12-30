@@ -374,8 +374,30 @@
 				{
 					"name": "Get Pregnancy",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/api/pregnancies",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"pregnancies"
+							]
+						}
 					},
 					"response": []
 				}
@@ -544,7 +566,39 @@
 					]
 				},
 				{
-					"name": "Add Child",
+					"name": "Get Child",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/api/pregnancies/{{pregnancyId}}/child",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"pregnancies",
+								"{{pregnancyId}}",
+								"child"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Child (error expected)",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -585,7 +639,48 @@
 					"response": []
 				},
 				{
-					"name": "Get Child",
+					"name": "Edit Child",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"age\": \"{{age}}\",\n    \"length\": \"{{length}}\",\n    \"weight\": \"{{weight}}\",\n    \"illustration\": \"{{illustration}}\",\n    \"description\": \"{{description}}_{{$timestamp}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/api/pregnancies/{{pregnancyId}}/child",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"pregnancies",
+								"{{pregnancyId}}",
+								"child"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Update",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -600,7 +695,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{protocol}}://{{host}}:{{port}}/api/childs",
+							"raw": "{{protocol}}://{{host}}:{{port}}/api/pregnancies/{{pregnancyId}}/child/update",
 							"protocol": "{{protocol}}",
 							"host": [
 								"{{host}}"
@@ -608,7 +703,10 @@
 							"port": "{{port}}",
 							"path": [
 								"api",
-								"childs"
+								"pregnancies",
+								"{{pregnancyId}}",
+								"child",
+								"update"
 							]
 						}
 					},

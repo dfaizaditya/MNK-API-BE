@@ -2,19 +2,20 @@ package com.sagara.momnkids.services;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sagara.momnkids.entity.Child;
 import com.sagara.momnkids.entity.Pregnancy;
 import com.sagara.momnkids.entity.User;
 import com.sagara.momnkids.enums.PregnancyStatus;
 import com.sagara.momnkids.exception.ResourceNotFoundException;
 import com.sagara.momnkids.models.PregnancyRequest;
 import com.sagara.momnkids.models.PregnancyResponse;
+import com.sagara.momnkids.repository.ChildRepository;
 import com.sagara.momnkids.repository.PregnancyRepository;
 import com.sagara.momnkids.utils.DateHelper;
 import com.sagara.momnkids.utils.PregnancyCalc;
@@ -51,8 +52,15 @@ public class PregnancyService {
         
         pregnancy.setUpdated_at(LocalDateTime.now());
 
+        Child child = new Child();
+        child.setId(UUID.randomUUID().toString());
+        child.setPregnancy(pregnancy);
+
+        pregnancy.setChild(child);
+
         Pregnancy saved = pregnancyRepository.save(pregnancy);
         PregnancyResponse pregnancyResponse = new PregnancyResponse(saved);
+        
         return pregnancyResponse;
     }
 

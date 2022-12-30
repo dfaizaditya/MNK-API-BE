@@ -2,6 +2,7 @@ package com.sagara.momnkids.entity;
 
 import java.math.BigDecimal;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -17,7 +18,7 @@ public class Child {
     @Id
     private String id;
     @JoinColumn
-    @OneToOne
+    @OneToOne(mappedBy = "child")
     @JsonIgnore
     private Pregnancy pregnancy;
     private BigDecimal age;
