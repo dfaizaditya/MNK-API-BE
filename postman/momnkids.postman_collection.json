@@ -640,6 +640,17 @@
 				},
 				{
 					"name": "Edit Child",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set (\"randomNum\", _.random (20,100));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -655,7 +666,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"age\": \"{{age}}\",\n    \"length\": \"{{length}}\",\n    \"weight\": \"{{weight}}\",\n    \"illustration\": \"{{illustration}}\",\n    \"description\": \"{{description}}_{{$timestamp}}\"\n}",
+							"raw": "{\n    \"age\": \"{{age}}\",\n    \"length\": \"{{randomNum}}\",\n    \"weight\": \"{{randomNum}}\",\n    \"illustration\": \"{{illustration}}\",\n    \"description\": \"{{description}}_{{$timestamp}}\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -713,6 +724,12 @@
 					"response": []
 				}
 			]
+		}
+	],
+	"variable": [
+		{
+			"key": "randomNum",
+			"value": ""
 		}
 	]
 }
