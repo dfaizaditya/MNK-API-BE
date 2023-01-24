@@ -15,7 +15,6 @@ import com.sagara.momnkids.enums.PregnancyStatus;
 import com.sagara.momnkids.exception.ResourceNotFoundException;
 import com.sagara.momnkids.models.PregnancyRequest;
 import com.sagara.momnkids.models.PregnancyResponse;
-import com.sagara.momnkids.repository.ChildRepository;
 import com.sagara.momnkids.repository.PregnancyRepository;
 import com.sagara.momnkids.utils.DateHelper;
 import com.sagara.momnkids.utils.PregnancyCalc;

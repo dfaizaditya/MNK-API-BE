@@ -36,7 +36,6 @@ public class ChildService {
         child.setAge(request.getAge());
         child.setLength(request.getLength());
         child.setWeight(request.getWeight());
-        child.setIllustration(request.getIllustration());
         child.setDescription(request.getDescription());
         child.setPregnancy(pregnancy);
 
@@ -51,7 +50,6 @@ public class ChildService {
         child.setAge(request.getAge());
         child.setLength(request.getLength());
         child.setWeight(request.getWeight());
-        child.setIllustration(request.getIllustration());
         child.setDescription(request.getDescription());
         
         Child saved = childRepository.save(child);

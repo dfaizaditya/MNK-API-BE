@@ -13,17 +13,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.sagara.momnkids.entity.Child;
 import com.sagara.momnkids.entity.Pregnancy;
 import com.sagara.momnkids.models.ChildRequest;
 import com.sagara.momnkids.models.ChildResponse;
+import com.sagara.momnkids.models.ImageRequest;
 import com.sagara.momnkids.response.ResponseHandler;
 import com.sagara.momnkids.security.services.UserDetailsImpl;
 import com.sagara.momnkids.services.ChildService;
 import com.sagara.momnkids.services.ChildUpdateService;
 import com.sagara.momnkids.services.PregnancyService;
+import com.sagara.momnkids.services.StorageService;
 
 @RestController
 @RequestMapping("/api")
@@ -38,6 +43,9 @@ public class ChildController {
 
     @Autowired
     private PregnancyService pregnancyService;
+
+    @Autowired
+    private StorageService storageService;
 
     @PostMapping("/pregnancies/{pregnancyId}/child")
     @PreAuthorize("hasAuthority('user')")
@@ -64,6 +72,21 @@ public class ChildController {
             Child child = childService.findAll(pregnancyId).get(0);
             ChildResponse response = childService.edit(child, request);
             childUpdateService.create(pregnancyService.findById(pregnancyId), request);
+            return ResponseHandler.generateResponse("Success", HttpStatus.OK, response);
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.MULTI_STATUS, null);
+        }
+
+    }
+
+    @PutMapping("/pregnancies/{pregnancyId}/child/image")
+    @PreAuthorize("hasAuthority('user')")
+    public ResponseEntity<Object> updateImage(
+            @PathVariable String pregnancyId,
+            @AuthenticationPrincipal UserDetailsImpl user,
+            @RequestParam("image")MultipartFile image) {
+        try {
+            String response = storageService.uploadImage(image);
             return ResponseHandler.generateResponse("Success", HttpStatus.OK, response);
         } catch (Exception e) {
             return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.MULTI_STATUS, null);
